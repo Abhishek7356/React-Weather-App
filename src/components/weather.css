@@ -83,6 +83,12 @@
     padding: 20px 20px 5px 20px;
 }
 
+.loading{
+    position: absolute;
+    top: 30%;
+    left: 45%;
+}
+
 .weatherFeels,.weatherHumidity,.weatherSpeed{
     font-size: 15px;
     font-weight: 500;
@@ -101,6 +107,10 @@
     padding: 10px;
     border-radius: 10px;
     font-weight: 600;
+}
+
+.searchPlace:focus{
+    border: 2px solid #e1dfdf;
 }
 
 

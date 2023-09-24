@@ -18,7 +18,7 @@ function TopBar() {
         <div className='header'>
             <MDBNavbar className='navbar ' expand='lg' light >
                 <MDBContainer className='container' fluid>
-                    <MDBNavbarBrand href='#'>Weather</MDBNavbarBrand>
+                    <MDBNavbarBrand href='#'> <img src="https://openweathermap.org/img/wn/04n@2x.png" width={'40px'} alt="" />Weather</MDBNavbarBrand>
                     <MDBNavbarToggler
                         type='button'
                         aria-expanded='false'

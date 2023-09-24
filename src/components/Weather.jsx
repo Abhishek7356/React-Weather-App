@@ -1,5 +1,6 @@
 import React from 'react'
 import './weather.css'
+import { MDBSpinner } from 'mdb-react-ui-kit';
 import { useState } from 'react';
 
 function Weather() {
@@ -7,6 +8,7 @@ function Weather() {
   const [location, setLocation] = useState('')
   const [data, setData] = useState({})
   const [url, setUrl] = useState('')
+  const [load, setLoad] = useState(false);
 
   const API_KEY = '59dac662600b6f269298b677e9ca5fba';
   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`;
@@ -21,13 +23,17 @@ function Weather() {
       const data = await response.json();
       setData(data);
       setUrl(`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+      setLoad(false)
       console.log(data);
-    }catch(err){
+    } catch (err) {
       alert('Location Not Fount !')
+      setLoad(false)
     }
   }
 
   const buttonHandler = () => {
+    setData({})
+    setLoad(true)
     fetchData()
   }
 
@@ -38,7 +44,7 @@ function Weather() {
       <div className='searchBox'>
         <input onChange={(e) => locationHandler(e)} type="text" className='searchPlace shadow-lg' placeholder='Enter Location' /> <button onClick={buttonHandler} className='searchBtn shadow-lg'><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
-
+      <div className="loading"></div>
       {data.name != undefined && <div>
         <div className="weather shadow-lg">
           <h4 className='locationName'>{data.name}</h4>
@@ -63,7 +69,9 @@ function Weather() {
           {data.weather ? <img src={url} width={'60px'} alt="" /> : null}
         </div>
       </div>}
-
+      {load && <MDBSpinner className='loading shadow-lg' role='status' color='light'>
+        <span className='visually-hidden'>Loading...</span>
+      </MDBSpinner>}
 
     </div>
 
