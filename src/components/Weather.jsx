@@ -2,6 +2,7 @@ import React from 'react'
 import './weather.css'
 import { MDBSpinner } from 'mdb-react-ui-kit';
 import { useState } from 'react';
+import { motion } from 'framer-motion'
 
 function Weather() {
 
@@ -46,11 +47,15 @@ function Weather() {
       </div>
       <div className="loading"></div>
       {data.name != undefined && <div>
-        <div className="weather shadow-lg">
+        <motion.div transition={{ duration: '.20' }} initial={{ x: '-100%' }}
+          whileInView={{ x: '0px' }}
+          viewport={{ once: true }} className="weather shadow-lg">
           <h4 className='locationName'>{data.name}</h4>
           {data.main ? <h1 className='locationWeather'>{data.main.temp}°C</h1> : null}
-        </div>
-        <div className="weatherDetails shadow-lg">
+        </motion.div>
+        <motion.div transition={{ duration: '.20',delay:'.60' }} initial={{ x: '-100%',opacity:'0' }}
+          whileInView={{ x: '0px',opacity:'1' }}
+          viewport={{ once: true }} className="weatherDetails shadow-lg">
           <div className="weatherFeels">
             {data.main ? <h3>{data.main.feels_like}°F</h3> : null}
             <p>Feels Like</p>
@@ -63,11 +68,11 @@ function Weather() {
             {data.main ? <h3>{data.wind.speed} km/h</h3> : null}
             <p>Wind Speed</p>
           </div>
-        </div>
-        <div className='currentWeather shadow-lg'>
+        </motion.div>
+        <motion.div transition={{ duration: '.20',delay:'.30' }} initial={{ x: '140%',opacity:'0' }} whileInView={{ x: '5px',opacity:'1' }} viewport={{ once: true }} className='currentWeather shadow-lg'>
           {data.weather ? <h4>{data.weather[0].description}</h4> : null}
           {data.weather ? <img src={url} width={'60px'} alt="" /> : null}
-        </div>
+        </motion.div>
       </div>}
       {load && <MDBSpinner className='loading shadow-lg' role='status' color='light'>
         <span className='visually-hidden'>Loading...</span>
